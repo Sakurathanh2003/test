@@ -15,7 +15,7 @@ struct CharacterSection {
 
 class FindWordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
    
-    let data = DataLoader().wordData
+    var data = DataLoader().wordData
     var dataWord = DataLoader().wordData
     var wordSection = [CharacterSection]()
     var nameSection = [String]()
@@ -91,6 +91,15 @@ class FindWordViewController: UIViewController, UITableViewDelegate, UITableView
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return nameSection
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "add" {
+            let addTableViewController = segue.destination as! AddTableViewController
+            addTableViewController.delegate = self
+        }
+    }
+    
+    
 // MARK: SearchBar Delegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchWord.text?.lowercased()
@@ -109,8 +118,18 @@ class FindWordViewController: UIViewController, UITableViewDelegate, UITableView
         viewDidLoad()
         tableView.reloadData()
     }
+// MARK: Action
+    @IBAction func addButton(_ sender: Any) {
+        performSegue(withIdentifier: "add", sender: nil)
+    }
     
-    
+}
+
+extension FindWordViewController: AddTableViewDelegate {
+    func addNew(with: Word) {
+        self.data.append(with)
+        tableView.reloadData()
+    }
 }
 
 
