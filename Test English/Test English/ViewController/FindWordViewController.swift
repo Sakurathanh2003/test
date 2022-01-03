@@ -99,6 +99,74 @@ class FindWordViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+// Delete + Update a cell
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let sectionW = wordSection[indexPath.section]
+        let word = sectionW.words[indexPath.row]
+        
+        let editAction = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
+            // Call update action
+            self.updateWord(word, indexPath: indexPath)
+        }
+        
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            // Call delete action
+            self.deleteWord(word, indexPath: indexPath)
+        }
+        editAction.backgroundColor = .blue
+        deleteAction.backgroundColor = .red
+        return [editAction, deleteAction]
+    }
+    
+// MARK: Function
+    private func deleteWord(_ word: Word, indexPath: IndexPath){
+        let alert = UIAlertController(title: "Delete", message: "Are you sure", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive){ (action) in
+            self.wordSection[indexPath.section].words.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func updateWord(_ word: Word, indexPath: IndexPath){
+        let alert = UIAlertController(title: "Edit Word", message: "Update a Word", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        // word
+        alert.addTextField { field in
+            field.placeholder = "word"
+            field.returnKeyType = .next
+        }
+        
+        // mean
+        alert.addTextField { field in
+            field.placeholder = "mean"
+            field.returnKeyType = .next
+        }
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) {  _ in
+            guard let fields = alert.textFields, fields.count == 2 else {return}
+            let wordPlace = fields[0]
+            let meanPlace = fields[1]
+            
+            self.wordSection[indexPath.section].words[indexPath.row].word = wordPlace.text!
+            self.wordSection[indexPath.section].words[indexPath.row].mean = meanPlace.text!
+            
+            self.tableView.reloadData()
+        }
+        
+        
+        
+        
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     
 // MARK: SearchBar Delegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -111,7 +111,7 @@ class AddTableViewController: UITableViewController {
         let p = pronunciationT.text
         let c = categoryT.text
         
-        var alert = UIAlertController(title: "Thieu thong tin", message: "Vui long nhap du", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Thieu thong tin", message: "Vui long nhap du", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(cancelAction)
         
