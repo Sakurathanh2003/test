@@ -139,22 +139,43 @@ class FindWordViewController: UIViewController, UITableViewDelegate, UITableView
         // word
         alert.addTextField { field in
             field.placeholder = "word"
+            field.text = word.word
             field.returnKeyType = .next
         }
         
         // mean
         alert.addTextField { field in
             field.placeholder = "mean"
+            field.text = word.mean
+            field.returnKeyType = .next
+        }
+        
+        // pronunciation
+        alert.addTextField { field in
+            field.placeholder = "pronunciation"
+            field.text = word.pronunciation
+            field.returnKeyType = .next
+        }
+        
+        // category
+        alert.addTextField { field in
+            field.placeholder = "category"
+            field.text = word.category
             field.returnKeyType = .next
         }
         
         let saveAction = UIAlertAction(title: "Save", style: .default) {  _ in
-            guard let fields = alert.textFields, fields.count == 2 else {return}
+            guard let fields = alert.textFields, fields.count == 4 else {return}
             let wordPlace = fields[0]
             let meanPlace = fields[1]
+            let proPlace = fields[2]
+            let catePlace = fields[3]
             
             self.wordSection[indexPath.section].words[indexPath.row].word = wordPlace.text!
             self.wordSection[indexPath.section].words[indexPath.row].mean = meanPlace.text!
+            self.wordSection[indexPath.section].words[indexPath.row].category = catePlace.text!
+            self.wordSection[indexPath.section].words[indexPath.row].pronunciation = proPlace.text!
+            
             
             self.tableView.reloadData()
         }

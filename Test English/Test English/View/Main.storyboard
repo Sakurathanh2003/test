@@ -130,7 +130,7 @@
             </objects>
             <point key="canvasLocation" x="-455" y="117"/>
         </scene>
-        <!--Item-->
+        <!--Test-->
         <scene sceneID="xNE-wk-lH8">
             <objects>
                 <viewController id="h35-c2-ldB" customClass="TestViewController" customModule="Test_English" customModuleProvider="target" sceneMemberID="viewController">
@@ -271,7 +271,7 @@
                         <viewLayoutGuide key="safeArea" id="qb0-aE-8M2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="student 4" selectedImage="Image" id="MLE-wk-Hne"/>
+                    <tabBarItem key="tabBarItem" title="Test" image="student 4" selectedImage="Image" id="MLE-wk-Hne"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="aText" destination="gIk-qk-hpm" id="dwT-o8-jLY"/>
