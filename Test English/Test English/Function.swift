@@ -18,12 +18,5 @@ func sound(_ word: String){
     talk.speak(speakWord)
 }
 
-func ChuyenThanhSo(_ kitu: String) -> Int{
-    var ans = Unicode.Scalar(kitu)
-    return Int(ans!.value)
-}
-
-
-
 
 
